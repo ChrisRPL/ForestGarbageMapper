@@ -51,7 +51,6 @@
         return engineInitializer.initializeEngine();
       }).then(function(appRunner) {
         var app = firebase.initializeApp(firebaseConfig);
-        firebase.getAnalytics(app);
         return appRunner.runApp();
       });
     });

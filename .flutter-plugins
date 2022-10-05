@@ -1,4 +1,6 @@
 # This is a generated file; do not edit or check into version control.
+cloud_firestore=/home/krzysztof/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-3.5.0/
+cloud_firestore_web=/home/krzysztof/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-2.8.9/
 firebase_core=/home/krzysztof/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/
 firebase_core_web=/home/krzysztof/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.7.3/
 flutter_plugin_android_lifecycle=/home/krzysztof/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.7/

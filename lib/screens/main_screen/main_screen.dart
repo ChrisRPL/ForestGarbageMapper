@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:io' show Platform;
+import 'package:forest_garbage_mapper/screens/main_screen/widgets/map_panel.dart';
+import 'package:universal_platform/universal_platform.dart';
+
+import 'package:forest_garbage_mapper/screens/main_screen/widgets/stats_panel.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -22,14 +25,22 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.all(15),
-          child: Platform.isAndroid ||
-                  Platform.isIOS ||
+          child: UniversalPlatform.isAndroid ||
+              UniversalPlatform.isIOS ||
                   MediaQuery.of(context).size.width < 800
               ? Column(
-                  children: [],
+                  children: const [
+                    MapPanel(),
+                    SizedBox(height: 15,),
+                    StatsPanel(isWideScreen: false)
+                  ],
                 )
               : Row(
-                  children: [],
+                  children: const [
+                    StatsPanel(isWideScreen: true,),
+                    SizedBox(height: 15,),
+                    MapPanel()
+                  ],
                 ),
         ));
   }
