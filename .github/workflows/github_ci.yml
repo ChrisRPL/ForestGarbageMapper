@@ -10,7 +10,7 @@ on:
 
 env:
   JAVA_VERSION: 12.x
-  FLUTTER_VERSION: 2.2.3
+  FLUTTER_VERSION: 2.17.6
   FLUTTER_CHANNEL: stable
 
 jobs:
