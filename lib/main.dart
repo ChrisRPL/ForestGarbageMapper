@@ -2,7 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:forest_garbage_mapper/screens/main_screen.dart';
+import 'package:forest_garbage_mapper/screens/main_screen/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
