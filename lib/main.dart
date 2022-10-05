@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'ForestGarbageMapper',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         nextScreen: const MainScreen(),
         splashTransition: SplashTransition.slideTransition,
         pageTransitionType: PageTransitionType.rightToLeftWithFade,
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.lightGreen
     );
   }
 }

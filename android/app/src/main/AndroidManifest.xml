@@ -4,6 +4,8 @@
         android:label="forest_garbage_mapper"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyBj5d3cSVmTYm-UXSMoOO2mloGr0m-1dQQ"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

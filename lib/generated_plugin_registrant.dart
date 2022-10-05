@@ -7,11 +7,13 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:firebase_core_web/firebase_core_web.dart';
+import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 // ignore: public_member_api_docs
 void registerPlugins(Registrar registrar) {
   FirebaseCoreWeb.registerWith(registrar);
+  GoogleMapsPlugin.registerWith(registrar);
   registrar.registerMessageHandler();
 }
