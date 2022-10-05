@@ -16,11 +16,7 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.lightGreen,
       ),
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-
-        ],
-      ),
+      body: Container()
     );
   }
 }
