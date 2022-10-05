@@ -40,7 +40,22 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script>
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyA6W_YvwiyuSPr_5HkpcNOZv_3ohpKAwUI",
+      authDomain: "garbagemap-5a1e8.firebaseapp.com",
+      projectId: "garbagemap-5a1e8",
+      storageBucket: "garbagemap-5a1e8.appspot.com",
+      messagingSenderId: "41206483940",
+      appId: "1:41206483940:web:cdd471c5eac8ad33f955f1",
+      measurementId: "G-R7T43KFXXW"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    firebase.getAnalytics(app);
+
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
