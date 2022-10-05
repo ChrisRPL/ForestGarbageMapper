@@ -41,9 +41,6 @@
       measurementId: "G-R7T43KFXXW"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    firebase.getAnalytics(app);
-
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
@@ -53,6 +50,8 @@
       }).then(function(engineInitializer) {
         return engineInitializer.initializeEngine();
       }).then(function(appRunner) {
+        var app = firebase.initializeApp(firebaseConfig);
+        firebase.getAnalytics(app);
         return appRunner.runApp();
       });
     });
