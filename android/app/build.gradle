@@ -37,10 +37,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    defaultConfig {
-        minSdkVersion 20
-    }
-
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -54,8 +50,8 @@ android {
         applicationId "com.garbage.mapper.forest_garbage_mapper"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 21
+        targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
