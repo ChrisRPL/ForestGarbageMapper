@@ -42,6 +42,7 @@ dependencies:
   page_transition: ^2.0.9
   universal_platform: ^1.0.0+1
   cloud_firestore: ^3.5.0
+  provider: ^6.0.3
 
 dev_dependencies:
   flutter_test:
