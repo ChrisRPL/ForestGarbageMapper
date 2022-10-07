@@ -76,10 +76,10 @@ jobs:
         with:
           channel: ${{env.FLUTTER_CHANNEL}}
       - run: |
+          flutter clean
           flutter pub get
           flutter build web --release
           cd build/web
-          cat flutter.js
           git init
           git config --global user.email shepard128@gmail.com
           git config --global user.name ChrisRPL
