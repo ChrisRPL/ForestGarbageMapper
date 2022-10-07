@@ -9,5 +9,6 @@ abstract class IGarbagePointService extends ChangeNotifier {
   Future<List<GarbagePoint>> getGarbagePoints(DroneService service);
   GarbagePointResponse getGarbagePointResponse(Map<String, dynamic> response);
   Future<GarbagePoint> getGarbagePointObject(GarbagePointResponse response, DroneService service);
-  List<CircleMarker> createMapMarkersFromPoints(List<GarbagePoint> points);
+  List<Marker> createMapMarkersFromPoints(List<GarbagePoint> points);
+  Future<String> getAddressFromCoordinates(double latitude, double longitude);
 }

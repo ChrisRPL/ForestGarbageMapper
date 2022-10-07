@@ -40,8 +40,8 @@ class _MapPanelState extends State<MapPanel> {
             ),
             FutureBuilder<List<GarbagePoint>>(
               future: garbageService.getGarbagePoints(droneService),
-              builder: (ctx, pointsSnap) => pointsSnap.hasData ?  CircleLayer(
-                circles: garbageService.createMapMarkersFromPoints(pointsSnap.data!),
+              builder: (ctx, pointsSnap) => pointsSnap.hasData ?  MarkerLayer(
+                markers: garbageService.createMapMarkersFromPoints(pointsSnap.data!),
               ) : Container(),
             )
           ],) : const CircularProgressIndicator(),
