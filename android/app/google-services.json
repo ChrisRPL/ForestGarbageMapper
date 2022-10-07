@@ -39,10 +39,46 @@
               "client_type": 3
             },
             {
-              "client_id": "41206483940-vedm3grk9gbrigts7v1s8ppugbojuq7b.apps.googleusercontent.com",
+              "client_id": "41206483940-bia1fss3j4q362iuk4bmags35chca9vs.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.garbage.mapper.forestGarbageMapper"
+                "bundle_id": "com.solveitmobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41206483940:android:957518b8f7bd6fb0f955f1",
+        "android_client_info": {
+          "package_name": "com.solveitmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41206483940-mtut8pn5i9h99541utc336doif9sde1p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0I1Bp9TGZFkPUJ7-b4YWa72v1zaOWLAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41206483940-mtut8pn5i9h99541utc336doif9sde1p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "41206483940-bia1fss3j4q362iuk4bmags35chca9vs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.solveitmobile"
               }
             }
           ]
