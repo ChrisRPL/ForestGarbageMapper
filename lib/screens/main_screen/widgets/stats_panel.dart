@@ -62,7 +62,7 @@ class _StatsPanelState extends State<StatsPanel> {
     int garbageCount = (garbageAndDrones.data!['garbage_points'] as List<GarbagePoint>).length;
     int distance = (garbageAndDrones.data!['drones'] as List<Drone>).map((e) => e.distanceTraveled).reduce((value, element) => value + element);
 
-    return [
+    return MediaQuery.of(context).size.width > 800 ? [
       Card(
         shape: const StadiumBorder(
           side: BorderSide(
@@ -138,6 +138,93 @@ class _StatsPanelState extends State<StatsPanel> {
             ],
           ),
         ),
+      ),
+    ] : [
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Card(
+            shape: const StadiumBorder(
+              side: BorderSide(
+                color: Colors.lightGreen,
+                width: 1.0,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      "Drones active: ${garbageAndDrones.data!['drones']!.length.toString()}")
+                ],
+              ),
+            ),
+          ),
+          Card(
+            shape: const StadiumBorder(
+              side: BorderSide(
+                color: Colors.lightGreen,
+                width: 1.0,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      "Sessions made: $sessions")
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Card(
+            shape: const StadiumBorder(
+              side: BorderSide(
+                color: Colors.lightGreen,
+                width: 1.0,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      "Overall distance: $distance")
+                ],
+              ),
+            ),
+          ),
+          Card(
+            shape: const StadiumBorder(
+              side: BorderSide(
+                color: Colors.lightGreen,
+                width: 1.0,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      "Garbage located: $garbageCount")
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     ];
   }

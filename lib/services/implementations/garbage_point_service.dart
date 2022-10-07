@@ -64,6 +64,7 @@ class GarbagePointService extends ChangeNotifier
 
   @override
   List<Marker> createMapMarkersFromPoints(List<GarbagePoint> points) {
+    ScrollController controller = ScrollController();
     final DateFormat format = DateFormat('yyyy-MM-dd – kk:mm');
     List<Marker> markers = [];
 
@@ -75,72 +76,22 @@ class GarbagePointService extends ChangeNotifier
           builder: (BuildContext context) => InkWell(
                 child: const FaIcon(FontAwesomeIcons.trashCan),
                 onTap: () => showModalBottomSheet(
-                    isScrollControlled: true,
                     context: context,
-                    builder: (ctx) => Wrap(
-                          alignment: WrapAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 300,
-                              child: Card(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Card(
-                                      elevation: 10,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                        side: const BorderSide(
-                                          color: Colors.lightGreen,
-                                          width: 1.0,
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            FutureBuilder<String>(
-                                              future: getAddressFromCoordinates(
-                                                  point.coords.latitude,
-                                                  point.coords.longitude),
-                                              builder: (ctx, address) => address
-                                                      .hasData
-                                                  ? Column(
-                                                      children: [
-                                                        const Text(
-                                                          "City:",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 15,
-                                                        ),
-                                                        Text(
-                                                          address.data!,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 20),
-                                                        )
-                                                      ],
-                                                    )
-                                                  : const CircularProgressIndicator(),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 300,
-                                      child: Card(
+                    builder: (ctx) => SingleChildScrollView(
+                          controller: controller,
+                          scrollDirection: Axis.horizontal,
+                          child: Wrap(
+                            children: [
+                              SizedBox(
+                                height: 300,
+                                child: Card(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Card(
                                         elevation: 10,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -158,161 +109,220 @@ class GarbagePointService extends ChangeNotifier
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              const Text(
-                                                  "Date captured:", style: TextStyle(fontWeight: FontWeight.bold),),
-                                              const SizedBox(
-                                                height: 15,
-                                              ),
-                                              Text(
-                                                format.format(point.time),
-                                                style: const TextStyle(
-                                                    fontSize: 20),
+                                              FutureBuilder<String>(
+                                                future:
+                                                    getAddressFromCoordinates(
+                                                        point.coords.latitude,
+                                                        point.coords.longitude),
+                                                builder: (ctx, address) => address
+                                                        .hasData
+                                                    ? Column(
+                                                        children: [
+                                                          const Text(
+                                                            "City:",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 15,
+                                                          ),
+                                                          Text(
+                                                            address.data!,
+                                                            style:
+                                                                const TextStyle(
+                                                                    fontSize:
+                                                                        15),
+                                                          )
+                                                        ],
+                                                      )
+                                                    : const CircularProgressIndicator(),
                                               )
                                             ],
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 300,
-                                      child: Card(
-                                        elevation: 10,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          side: const BorderSide(
-                                            color: Colors.lightGreen,
-                                            width: 1.0,
+                                      SizedBox(
+                                        height: 300,
+                                        child: Card(
+                                          elevation: 10,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                            side: const BorderSide(
+                                              color: Colors.lightGreen,
+                                              width: 1.0,
+                                            ),
                                           ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                "Assigned drone:",
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              const SizedBox(
-                                                height: 15,
-                                              ),
-                                              Text(
-                                                "Name: ${point.idDroneObject.name}",
-                                                style: const TextStyle(
-                                                    fontSize: 20),
-                                              ),
-                                              Text(
-                                                "Sessions count: ${point.idDroneObject.sessionsCount}",
-                                                style: const TextStyle(
-                                                    fontSize: 20),
-                                              ),
-                                              Text(
-                                                "Distance traveled: ${point.idDroneObject.distanceTraveled}",
-                                                style: const TextStyle(
-                                                    fontSize: 20),
-                                              ),
-                                            ],
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "Date captured:",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Text(
+                                                  format.format(point.time),
+                                                  style: const TextStyle(
+                                                      fontSize: 15),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 300,
-                                      child: Card(
-                                        elevation: 10,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          side: const BorderSide(
-                                            color: Colors.lightGreen,
-                                            width: 1.0,
+                                      SizedBox(
+                                        height: 300,
+                                        child: Card(
+                                          elevation: 10,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                            side: const BorderSide(
+                                              color: Colors.lightGreen,
+                                              width: 1.0,
+                                            ),
                                           ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                "Coordinates:",
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              const SizedBox(
-                                                height: 15,
-                                              ),
-                                              Text(
-                                                "N [${point.coords.latitude}]",
-                                                style: const TextStyle(
-                                                    fontSize: 20),
-                                              ),
-                                              Text(
-                                                "E [${point.coords.longitude}]",
-                                                style: const TextStyle(
-                                                    fontSize: 20),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 300,
-                                      child: Card(
-                                        elevation: 10,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          side: const BorderSide(
-                                            color: Colors.lightGreen,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                "Garbage image:",
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              const SizedBox(
-                                                height: 15,
-                                              ),
-                                              ImageNetwork(
-                                                image: point.imageUrl,
-                                                height: 200,
-                                                width: 200,
-                                                fitWeb: BoxFitWeb.cover,
-                                                fitAndroidIos: BoxFit.cover,
-                                                curve: Curves.easeIn,
-                                              )
-                                            ],
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "Assigned drone:",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Text(
+                                                  "Name: ${point.idDroneObject.name}",
+                                                  style: const TextStyle(
+                                                      fontSize: 15),
+                                                ),
+                                                Text(
+                                                  "Sessions count: ${point.idDroneObject.sessionsCount}",
+                                                  style: const TextStyle(
+                                                      fontSize: 15),
+                                                ),
+                                                Text(
+                                                  "Distance traveled: ${point.idDroneObject.distanceTraveled}",
+                                                  style: const TextStyle(
+                                                      fontSize: 15),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        height: 300,
+                                        child: Card(
+                                          elevation: 10,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                            side: const BorderSide(
+                                              color: Colors.lightGreen,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "Coordinates:",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Text(
+                                                  "N [${point.coords.latitude}]",
+                                                  style: const TextStyle(
+                                                      fontSize: 15),
+                                                ),
+                                                Text(
+                                                  "E [${point.coords.longitude}]",
+                                                  style: const TextStyle(
+                                                      fontSize: 15),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 300,
+                                        child: Card(
+                                          elevation: 10,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                            side: const BorderSide(
+                                              color: Colors.lightGreen,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "Garbage image:",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 15,
+                                                ),
+                                                ImageNetwork(
+                                                  image: point.imageUrl,
+                                                  height: 200,
+                                                  width: 200,
+                                                  fitWeb: BoxFitWeb.cover,
+                                                  fitAndroidIos: BoxFit.cover,
+                                                  curve: Curves.easeIn,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         )),
               )));
     }
