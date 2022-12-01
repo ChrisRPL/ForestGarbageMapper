@@ -37,6 +37,7 @@ class _MapPanelState extends State<MapPanel> {
               urlTemplate:
               'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+              retinaMode: MediaQuery.of(context).devicePixelRatio > 1.0,
             ),
             FutureBuilder<List<GarbagePoint>>(
               future: garbageService.getGarbagePoints(droneService),

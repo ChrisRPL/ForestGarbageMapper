@@ -70,11 +70,9 @@ class GarbagePointService extends ChangeNotifier
 
     for (GarbagePoint point in points) {
       markers.add(Marker(
-          width: 80,
-          height: 80,
           point: LatLng(point.coords.latitude, point.coords.longitude),
           builder: (BuildContext context) => InkWell(
-                child: const FaIcon(FontAwesomeIcons.trashCan),
+                child: FaIcon(FontAwesomeIcons.solidCircle, size: 15, color: Colors.redAccent.withOpacity(0.6)),
                 onTap: () => showModalBottomSheet(
                     context: context,
                     builder: (ctx) => SingleChildScrollView(
