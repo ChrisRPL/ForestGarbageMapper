@@ -62,7 +62,7 @@ jobs:
       - name: Upload app release
         uses: actions/upload-artifact@v3
         with:
-          name: solve-it release
+          name: garbage-mapper release
           path: build/app/outputs/flutter-apk/app-release.apk
   publish_ghPages:
     name: Publish GH Pages
