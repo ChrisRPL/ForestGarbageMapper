@@ -41,6 +41,7 @@ jobs:
           flutter-version: ${{env.FLUTTER_VERSION}}
       - run: |
           flutter clean
+          flutter upgrade
           flutter pub get
           flutter build web
   build_android:
