@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:forest_garbage_mapper/models/drone.dart';
-import 'package:forest_garbage_mapper/models/garbage_point.dart';
 import 'package:forest_garbage_mapper/services/implementations/drone_service.dart';
 import 'package:forest_garbage_mapper/services/implementations/garbage_point_service.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,7 @@ class _StatsPanelState extends State<StatsPanel> {
         Provider.of<GarbagePointService>(context, listen: false);
 
     return widget.isWideScreen
-        ? FutureBuilder<Map<String, List<dynamic>>>(
+        ? FutureBuilder<Map<String, dynamic>>(
             future: _getDronesAndGarbage(garbagePointsService, droneService),
             builder: (ctx, garbageAndDrones) => garbageAndDrones.hasData
                 ? Column(
@@ -31,7 +31,7 @@ class _StatsPanelState extends State<StatsPanel> {
                   )
                 : const CircularProgressIndicator(),
           )
-        : FutureBuilder<Map<String, List<dynamic>>>(
+        : FutureBuilder<Map<String, dynamic>>(
             future: _getDronesAndGarbage(garbagePointsService, droneService),
             builder: (ctx, garbageAndDrones) => garbageAndDrones.hasData
                 ? Row(
@@ -42,24 +42,23 @@ class _StatsPanelState extends State<StatsPanel> {
           );
   }
 
-  Future<Map<String, List<dynamic>>> _getDronesAndGarbage(
+  Future<Map<String, dynamic>> _getDronesAndGarbage(
       GarbagePointService garbagePointService,
       DroneService droneService) async {
     List<Drone> drones = await droneService.getDrones();
-    List<GarbagePoint> garbagePoints =
-        await garbagePointService.getGarbagePoints(droneService);
+    int pointsCount = (await FirebaseFirestore.instance.collection("/GarbagePoint").get()).docs.length;
 
-    Map<String, List<dynamic>> dronesAndGarbage = {
+    Map<String, dynamic> dronesAndGarbage = {
       "drones": drones,
-      "garbage_points": garbagePoints
+      "garbage_points": pointsCount
     };
 
     return dronesAndGarbage;
   }
 
-  List<Widget> getStatsCards(AsyncSnapshot<Map<String, List<dynamic>>> garbageAndDrones) {
+  List<Widget> getStatsCards(AsyncSnapshot<Map<String, dynamic>> garbageAndDrones) {
     int sessions = (garbageAndDrones.data!['drones'] as List<Drone>).map((e) => e.sessionsCount).reduce((value, element) => value + element);
-    int garbageCount = (garbageAndDrones.data!['garbage_points'] as List<GarbagePoint>).length;
+    int garbageCount = (garbageAndDrones.data!['garbage_points'] as int);
     int distance = (garbageAndDrones.data!['drones'] as List<Drone>).map((e) => e.distanceTraveled).reduce((value, element) => value + element);
 
     return MediaQuery.of(context).size.width > 800 ? [

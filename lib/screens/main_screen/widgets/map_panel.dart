@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
@@ -39,10 +40,13 @@ class _MapPanelState extends State<MapPanel> {
               userAgentPackageName: 'dev.fleaflet.flutter_map.example',
               retinaMode: MediaQuery.of(context).devicePixelRatio > 1.0,
             ),
-            FutureBuilder<List<GarbagePoint>>(
-              future: garbageService.getGarbagePoints(droneService),
-              builder: (ctx, pointsSnap) => pointsSnap.hasData ?  MarkerLayer(
-                markers: garbageService.createMapMarkersFromPoints(pointsSnap.data!),
+            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: FirebaseFirestore.instance.collection("/GarbagePoint").snapshots(),
+              builder: (ctx, pointsSnaps) => pointsSnaps.hasData ? FutureBuilder<List<GarbagePoint>>(
+                future: garbageService.getGarbagePoints(droneService, pointsSnaps.data!.docs),
+                builder: (ctx, pointsSnap) => pointsSnap.hasData ?  MarkerLayer(
+                  markers: garbageService.createMapMarkersFromPoints(pointsSnap.data!),
+                ) : Container(),
               ) : Container(),
             )
           ],) : const CircularProgressIndicator(),

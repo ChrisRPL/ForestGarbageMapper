@@ -45,10 +45,7 @@ class GarbagePointService extends ChangeNotifier
   }
 
   @override
-  Future<List<GarbagePoint>> getGarbagePoints(DroneService service) async {
-    List<DocumentSnapshot<Map<String, dynamic>>> pointsSnaps =
-        (await FirebaseFirestore.instance.collection("/GarbagePoint").get())
-            .docs;
+  Future<List<GarbagePoint>> getGarbagePoints(DroneService service, List<DocumentSnapshot<Map<String, dynamic>>> pointsSnaps) async {
     List<GarbagePoint> garbagePoints = [];
 
     for (DocumentSnapshot<Map<String, dynamic>> pointSnap in pointsSnaps) {
