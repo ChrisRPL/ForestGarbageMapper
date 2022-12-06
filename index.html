@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Mapping localizations of garbages in forests collected from the drone in Flutter.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="forest_garbage_mapper">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>ForestGarbageMapper</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = '1030170445';
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
+
+</head>
+<body>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyA6W_YvwiyuSPr_5HkpcNOZv_3ohpKAwUI",
+      authDomain: "garbagemap-5a1e8.firebaseapp.com",
+      projectId: "garbagemap-5a1e8",
+      storageBucket: "garbagemap-5a1e8.appspot.com",
+      messagingSenderId: "41206483940",
+      appId: "1:41206483940:web:cdd471c5eac8ad33f955f1",
+      measurementId: "G-R7T43KFXXW"
+    };
+
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        }
+      }).then(function(engineInitializer) {
+        return engineInitializer.initializeEngine();
+      }).then(function(appRunner) {
+        var app = firebase.initializeApp(firebaseConfig);
+        return appRunner.runApp();
+      });
+    });
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
+</html>
