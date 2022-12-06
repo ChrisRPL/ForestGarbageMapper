@@ -40,8 +40,6 @@ jobs:
           channel: ${{env.FLUTTER_CHANNEL}}
           flutter-version: ${{env.FLUTTER_VERSION}}
       - run: |
-          flutter clean
-          flutter upgrade --major-versions
           flutter pub get
           flutter build web
   build_android:
