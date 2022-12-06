@@ -79,6 +79,7 @@ jobs:
           channel: ${{env.FLUTTER_CHANNEL}}
       - run: |
           flutter clean
+          flutter pub upgrade --major-versions
           flutter pub get
           flutter build web --release
           cd build/web
