@@ -59,6 +59,7 @@ jobs:
           flutter-version: ${{env.FLUTTER_VERSION}}
           channel: ${{env.FLUTTER_CHANNEL}}
       - run: flutter clean
+      - run: flutter pub upgrade --major-versions
       - run: flutter pub get
       - run: flutter build apk
       - name: Upload app release
